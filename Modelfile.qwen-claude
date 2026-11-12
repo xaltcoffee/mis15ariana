@@ -1,0 +1,2 @@
+FROM SetneufPT/Qwen3.8-27B_Q4_100k_24GB-GPU:latest
+PARAMETER num_ctx 32768
