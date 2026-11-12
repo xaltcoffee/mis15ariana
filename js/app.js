@@ -96,26 +96,118 @@ const completeEl = document.querySelector("#game-complete");
 const progressLabel = document.querySelector("#game-progress");
 const videoModal = document.querySelector("#video-modal");
 const videoEl = document.querySelector("#surprise-video");
+const MUSIC_VOLUME = 0.32;
 const backgroundMusic = document.querySelector("#background-music");
-backgroundMusic.volume = 0.32;
+backgroundMusic.volume = MUSIC_VOLUME;
+const welcomeOverlay = document.querySelector("#welcome");
+let introDone = !welcomeOverlay; // La portada de bienvenida es la que da el primer gesto válido.
+let musicSilent = false; // El navegador dejó arrancar solo en silencio: falta el primer toque para el sonido.
+let musicFade = null;
+
+function fadeMusicTo(target) {
+  clearInterval(musicFade);
+  const step = target > backgroundMusic.volume ? 0.04 : -0.04;
+  musicFade = setInterval(() => {
+    const next = backgroundMusic.volume + step;
+    const done = step > 0 ? next >= target : next <= target;
+    backgroundMusic.volume = done ? target : next;
+    if (done) clearInterval(musicFade);
+  }, 60);
+}
+
+function detachMusicUnlock() {
+  document.removeEventListener("pointerdown", unlockBackgroundMusic, true);
+  document.removeEventListener("touchstart", unlockBackgroundMusic, true);
+  document.removeEventListener("keydown", unlockBackgroundMusic, true);
+  document.removeEventListener("click", unlockBackgroundMusic, true);
+}
+
+// Un solo toque, clic o tecla en cualquier parte de la pantalla activa el sonido.
+function unlockBackgroundMusic() {
+  if (!introDone) return;
+  if (musicSilent) {
+    musicSilent = false;
+    backgroundMusic.muted = false;
+    backgroundMusic.volume = 0;
+    const playback = backgroundMusic.play();
+    if (playback && playback.catch) playback.catch(() => {});
+    fadeMusicTo(MUSIC_VOLUME);
+  }
+  detachMusicUnlock();
+}
+
+// Arranque garantizado con sonido: se ejecuta desde un toque real (botón de bienvenida).
+function playMusicFromGesture() {
+  if (modal.classList.contains("open")) return;
+  musicSilent = false;
+  backgroundMusic.muted = false;
+  backgroundMusic.volume = 0;
+  const playback = backgroundMusic.play();
+  if (playback && playback.catch) playback.catch(() => {});
+  fadeMusicTo(MUSIC_VOLUME);
+  detachMusicUnlock();
+}
 
 function startBackgroundMusic() {
+  if (!introDone) return;
   if (modal.classList.contains("open")) return;
   if (!backgroundMusic.paused) {
     document.body.classList.add("music-playing");
     return;
   }
   const playback = backgroundMusic.play();
-  if (playback && playback.catch) playback.catch(() => {});
+  if (!playback || !playback.catch) return;
+  playback.catch(() => {
+    // Autoplay con sonido bloqueado: arrancamos en silencio para activarlo al primer toque.
+    musicSilent = true;
+    backgroundMusic.muted = true;
+    backgroundMusic.volume = MUSIC_VOLUME;
+    const silenced = backgroundMusic.play();
+    if (silenced && silenced.catch) silenced.catch(() => {});
+  });
 }
 function pauseBackgroundMusic() {
   backgroundMusic.pause();
 }
-backgroundMusic.addEventListener("play", () => document.body.classList.add("music-playing"));
+backgroundMusic.addEventListener("play", () => {
+  document.body.classList.add("music-playing");
+  if (!backgroundMusic.muted) detachMusicUnlock();
+});
 backgroundMusic.addEventListener("pause", () => document.body.classList.remove("music-playing"));
 document.addEventListener("pointerdown", startBackgroundMusic, { capture: true });
 document.addEventListener("keydown", startBackgroundMusic, { capture: true });
+document.addEventListener("pointerdown", unlockBackgroundMusic, true);
+document.addEventListener("touchstart", unlockBackgroundMusic, true);
+document.addEventListener("keydown", unlockBackgroundMusic, true);
+document.addEventListener("click", unlockBackgroundMusic, true);
 startBackgroundMusic();
+
+// --- Portada de bienvenida ---
+// El toque en la portada es un gesto real, así la música arranca con sonido en cualquier dispositivo.
+function replayHeroIntro() {
+  const items = document.querySelectorAll(".hero-photo img, .hero-copy > *");
+  items.forEach((el) => { el.style.animation = "none"; });
+  void document.body.offsetWidth;
+  items.forEach((el) => { el.style.animation = ""; });
+}
+function openInvitation() {
+  if (!welcomeOverlay || introDone) return;
+  introDone = true;
+  playMusicFromGesture();
+  document.body.classList.remove("intro-locked");
+  welcomeOverlay.classList.add("is-closing");
+  welcomeOverlay.setAttribute("aria-hidden", "true");
+  replayHeroIntro();
+  window.setTimeout(() => welcomeOverlay.classList.add("is-hidden"), 950);
+}
+if (welcomeOverlay) {
+  document.body.classList.add("intro-locked");
+  welcomeOverlay.addEventListener("click", openInvitation);
+  document.addEventListener("keydown", (e) => {
+    if (introDone) return;
+    if (e.key === "Enter" || e.key === " ") openInvitation();
+  });
+}
 
 const VIEW_W = canvas.width;
 const VIEW_H = canvas.height;

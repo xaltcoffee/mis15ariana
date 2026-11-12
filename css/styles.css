@@ -129,6 +129,47 @@ footer small{color:rgba(185,198,218,.55);font-size:8px}
 .text-reveal{opacity:0;transform:translateY(15px);filter:blur(2px);transition:opacity .8s ease var(--text-reveal-delay,0ms),transform .8s cubic-bezier(.2,.7,.2,1) var(--text-reveal-delay,0ms),filter .8s ease var(--text-reveal-delay,0ms)}
 .text-reveal.text-revealed{opacity:1;transform:translateY(0);filter:blur(0)}
 
+/* Portada de bienvenida */
+body.intro-locked{overflow:hidden}
+.welcome{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(26px,6vw,70px) 22px;overflow:hidden;overscroll-behavior:contain;background:radial-gradient(ellipse at 50% 36%,#102440 0%,#08172D 58%,#050D1C 100%);transition:opacity .9s ease,transform .9s ease}
+.welcome.is-closing{opacity:0;transform:scale(1.035);pointer-events:none}
+.welcome.is-hidden{display:none}
+.welcome-lines{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+.welcome-lines path{fill:none;stroke:#E5C184;stroke-width:1.1;vector-effect:non-scaling-stroke;opacity:.55}
+.welcome-lines path:nth-child(2),.welcome-lines path:nth-child(4){stroke-width:.6;opacity:.3}
+.welcome-particles{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;background-image:radial-gradient(circle at 14% 22%,rgba(229,193,132,.9) 0 1px,transparent 1.8px),radial-gradient(circle at 78% 16%,rgba(248,246,241,.75) 0 1px,transparent 2px),radial-gradient(circle at 88% 72%,rgba(229,193,132,.75) 0 1px,transparent 2px),radial-gradient(circle at 24% 80%,rgba(248,246,241,.6) 0 1px,transparent 2px),radial-gradient(circle at 52% 8%,rgba(229,193,132,.7) 0 1px,transparent 2px),radial-gradient(circle at 8% 54%,rgba(248,246,241,.5) 0 1px,transparent 2px);animation:particleDrift 22s ease-in-out infinite alternate}
+.welcome-inner{position:relative;z-index:1;width:min(100%,620px);max-width:100%;color:#F8F6F1}
+.welcome-inner>*{opacity:0;animation:welcomeRise .95s cubic-bezier(.2,.7,.2,1) both}
+.welcome-monogram{font-family:"Cormorant Garamond",serif;font-size:clamp(30px,3.6vw,42px);letter-spacing:.06em;color:#E5C184;margin:0;animation-delay:.15s}
+.welcome-monogram span{font-size:.4em;vertical-align:super;margin-left:3px}
+.welcome-divider{display:flex;align-items:center;justify-content:center;gap:15px;color:#E5C184;height:18px;margin:13px 0 15px;animation-delay:.28s}
+.welcome-divider span{height:1px;width:clamp(46px,9vw,86px);background:linear-gradient(90deg,transparent,rgba(229,193,132,.75))}
+.welcome-divider span:last-child{transform:rotate(180deg)}
+.welcome-eyebrow{font-size:clamp(8px,.78vw,11px);letter-spacing:.38em;color:#F8F6F1;margin:0 0 12px;animation-delay:.4s}
+.welcome-name{font-family:"Great Vibes",cursive;font-weight:400;font-size:clamp(66px,13.5vw,148px);line-height:.94;margin:0;color:#F8F6F1;text-shadow:0 6px 40px rgba(248,246,241,.14);background:linear-gradient(105deg,#F8F6F1 0%,#F8F6F1 37%,#FFFFFF 45%,#E5C184 50%,#FFFFFF 55%,#F8F6F1 63%,#F8F6F1 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:welcomeRise .95s cubic-bezier(.2,.7,.2,1) .52s both,welcomeShimmer 9s ease-in-out 1.8s infinite}
+.welcome-family{font-family:"Cormorant Garamond",serif;font-size:clamp(15px,2.3vw,27px);letter-spacing:clamp(3px,.5vw,8px);text-transform:uppercase;margin:8px 0 0;color:#F8F6F1;animation-delay:.64s}
+.welcome-subtitle{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(20px,2.6vw,33px);margin:14px 0 0;color:#DCE8F5;animation-delay:.76s}
+.welcome-subtitle span{font-style:normal;font-size:1.45em;color:#E5C184;margin:0 5px}
+.welcome-date{font-size:clamp(8px,.78vw,11px);letter-spacing:clamp(2px,.32vw,5px);color:#F8F6F1;margin:14px 0 0;animation-delay:.88s}
+.welcome-button{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:14px;margin-top:clamp(20px,3.4vw,34px);min-width:min(100%,300px);min-height:58px;padding:16px 30px;border:1px solid #E5C184;border-radius:999px;background:rgba(229,193,132,.05);color:#F8F6F1;font-family:Montserrat,sans-serif;font-size:clamp(9px,.76vw,11px);font-weight:500;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;overflow:hidden;opacity:0;transition:transform .35s ease,border-color .35s ease,color .35s ease,box-shadow .35s ease;animation:welcomeRiseButton .95s cubic-bezier(.2,.7,.2,1) 1s both,welcomeButtonGlow 3.6s ease-in-out 1.9s infinite}
+.welcome-button::before{content:"";position:absolute;inset:0 auto 0 -60%;width:38%;background:linear-gradient(90deg,transparent,rgba(229,193,132,.3),transparent);transform:skewX(-22deg);transition:left .7s ease}
+.welcome-button:hover::before,.welcome-button:focus-visible::before{left:130%}
+.welcome-button:hover,.welcome-button:focus-visible{transform:translateY(-2px);border-color:#F8F6F1;color:#E5C184;background:rgba(229,193,132,.08);box-shadow:0 0 34px rgba(229,193,132,.26);outline:none}
+.welcome-button span{font-size:13px;color:#E5C184}
+@keyframes welcomeRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes welcomeRiseButton{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@keyframes welcomeShimmer{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+@keyframes welcomeButtonGlow{0%,100%{filter:drop-shadow(0 0 6px rgba(229,193,132,.18))}50%{filter:drop-shadow(0 0 18px rgba(229,193,132,.5))}}
+@media(max-width:700px){
+ .welcome{padding:24px 18px}
+ .welcome-eyebrow{letter-spacing:.28em}
+ .welcome-button{min-width:min(100%,260px);min-height:54px;padding:15px 24px;letter-spacing:.24em}
+}
+@media(max-width:380px){
+ .welcome-name{font-size:clamp(58px,17vw,88px)}
+ .welcome-family{letter-spacing:3px}
+}
+
 /* Interactive game */
 .game-modal{position:fixed;inset:0;z-index:20;background:rgba(5,9,20,.9);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(12px)}
 .game-modal.open{display:flex}

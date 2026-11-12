@@ -13,6 +13,27 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="text-white">
+  <div id="welcome" class="welcome" role="dialog" aria-modal="true" aria-label="Abrir la invitación de Ariana">
+    <svg class="welcome-lines" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 0 120 C 260 168, 300 -20, 452 -78" />
+      <path d="M 0 166 C 272 204, 316 20, 470 -38" />
+      <path d="M 1180 980 C 1400 878, 1502 826, 1600 636" />
+      <path d="M 1244 980 C 1442 890, 1532 842, 1600 698" />
+    </svg>
+    <div class="welcome-particles" aria-hidden="true"></div>
+    <div class="welcome-inner">
+      <p class="welcome-monogram">A<span>✦</span></p>
+      <div class="welcome-divider" aria-hidden="true"><span></span>✦<span></span></div>
+      <p class="welcome-eyebrow">UNA NOCHE PARA RECORDAR</p>
+      <h1 class="welcome-name">Ariana</h1>
+      <p class="welcome-family">Jauja Aguilar</p>
+      <p class="welcome-subtitle">Mis <span>15</span> años</p>
+      <p class="welcome-date">SÁBADO · 21 NOVIEMBRE 2026</p>
+      <button id="open-invitation" class="welcome-button" type="button">ABRIR INVITACIÓN <span>✦</span></button>
+    </div>
+  </div>
+  <noscript><style>.welcome{display:none!important}body.intro-locked{overflow:auto!important}</style></noscript>
+
   <div id="three-bg" aria-hidden="true"></div>
   <div class="ambient-vignette"></div>
 
@@ -166,7 +187,7 @@
     </div>
   </div>
 
-  <audio id="background-music" src="musicAri.m4a" preload="auto" autoplay loop playsinline></audio>
+  <audio id="background-music" src="musicAri.m4a" preload="auto" loop playsinline></audio>
 
   <script type="module" src="js/app.js"></script>
 </body>
