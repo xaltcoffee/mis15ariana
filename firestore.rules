@@ -23,7 +23,7 @@ service cloud.firestore {
 
     function isAdmin() {
       return request.auth != null
-        && request.auth.token.email == 'ADMIN_EMAIL_AQUI';
+        && request.auth.token.email == 'jauja.ariana@gmail.com';
     }
 
     // Validación de integridad: evita datos basura insertados a mano.

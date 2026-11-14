@@ -130,11 +130,41 @@ main,header,footer{position:relative;z-index:2}
 .admin-stat{border:1px solid rgba(216,216,223,.24);padding:26px 22px;text-align:center;background:linear-gradient(110deg,rgba(248,250,255,.06),rgba(248,250,255,.02))}
 .admin-stat strong{display:block;font-family:"Cormorant Garamond",serif;font-weight:400;font-size:44px;color:var(--champagne);margin-top:8px}
 .admin-table-wrap{width:100%;overflow-x:auto;border:1px solid rgba(216,216,223,.2)}
-.admin-table{width:100%;border-collapse:collapse;font-size:12px;min-width:720px}
-.admin-table th{text-align:left;padding:15px 18px;background:rgba(11,24,48,.6);color:var(--muted);font-size:9px;letter-spacing:2px;font-weight:500;border-bottom:1px solid rgba(216,216,223,.2);white-space:nowrap}
+/* "separate" (no "collapse") es obligatorio para que la columna fija funcione. */
+.admin-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12px;min-width:780px}
+.admin-table th{text-align:left;padding:15px 18px;background:#0d1d38;color:var(--muted);font-size:9px;letter-spacing:2px;font-weight:500;border-bottom:1px solid rgba(216,216,223,.2);white-space:nowrap}
 .admin-table td{padding:14px 18px;border-bottom:1px solid rgba(216,216,223,.1);color:var(--crystal)}
 .admin-table tbody tr:hover{background:rgba(248,250,255,.04)}
+/* La columna de acciones se fija a la derecha para que los botones siempre
+   queden visibles aunque la tabla tenga scroll horizontal. */
+.admin-table th:last-child,.admin-table td:last-child{position:sticky;right:0;z-index:3;text-align:right;background:#0B1830}
+.admin-table th:last-child{background:#0d1d38;box-shadow:-14px 0 20px -14px rgba(0,0,0,.65)}
+.admin-table td:last-child{box-shadow:-14px 0 20px -14px rgba(0,0,0,.65)}
+.admin-table tbody tr:hover td:last-child{background:#101f39}
+.admin-table tbody tr.is-editing td:last-child{background:#0f1f38}
+.admin-table tbody tr.is-confirming td:last-child{background:#112038}
 #admin-dashboard[hidden]{display:none!important}
+.admin-actions{display:flex;gap:8px;justify-content:flex-end;align-items:center;flex-wrap:wrap;white-space:nowrap}
+.admin-action{border:1px solid rgba(216,216,223,.5);background:transparent;color:var(--silver);font-family:Montserrat,sans-serif;font-size:8px;letter-spacing:1.6px;text-transform:uppercase;padding:8px 12px;cursor:pointer;transition:.25s}
+.admin-action:hover{background:rgba(216,216,223,.14);border-color:rgba(216,216,223,.85);color:var(--crystal)}
+.admin-action:disabled{opacity:.5;cursor:not-allowed}
+.admin-action.is-danger{border-color:rgba(229,193,132,.45);color:var(--champagne)}
+.admin-action.is-danger:hover{background:rgba(229,193,132,.14);border-color:var(--champagne);color:#fff}
+.admin-action.is-save{border-color:rgba(229,193,132,.6);background:rgba(229,193,132,.12);color:var(--champagne)}
+.admin-action.is-save:hover{background:rgba(229,193,132,.2);border-color:var(--champagne);color:#fff}
+.admin-table tr.is-editing{background:rgba(229,193,132,.05)}
+.admin-table tr.is-confirming{background:rgba(229,193,132,.06)}
+.admin-input,.admin-select{width:100%;background:rgba(8,16,32,.75);border:1px solid rgba(216,216,223,.4);color:var(--crystal);font-family:Montserrat,sans-serif;font-size:12px;padding:8px 10px}
+.admin-input:focus,.admin-select:focus{outline:none;border-color:var(--champagne);box-shadow:0 0 0 2px rgba(229,193,132,.18)}
+.admin-select{cursor:pointer}
+.admin-select option{background:#0E1F3B;color:var(--crystal)}
+.admin-confirm-text{color:var(--champagne);font-size:10px;letter-spacing:1px}
+.admin-row-feedback{display:block;color:#F0B4B4;font-size:9px;line-height:1.5;letter-spacing:.3px;margin-top:6px;text-align:right;max-width:230px}
+.admin-table td:has(.admin-actions){white-space:nowrap}
+@media(max-width:700px){
+ .admin-actions{justify-content:flex-start}
+ .admin-row-feedback{text-align:left}
+}
 .closing{font-family:"Great Vibes",cursive;font-size:56px;color:var(--silver);margin:42px 0 0}
 .closing-star{color:var(--champagne);font-size:20px;margin-top:8px;animation:twinkle 4.5s ease-in-out infinite}
 .game-invite-section{padding:35px 7vw 90px;background:var(--midnight)}
