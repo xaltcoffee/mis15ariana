@@ -97,6 +97,44 @@ main,header,footer{position:relative;z-index:2}
 .dress-card .gold-warning{color:var(--champagne);font-size:11px}
 .rsvp-section{text-align:center;background:radial-gradient(ellipse at center,rgba(82,107,138,.5) 0%,#0B1830 65%);padding-top:110px;padding-bottom:100px}
 .rsvp-section .gold-button{margin-top:25px}
+[hidden]{display:none!important}
+.rsvp-form{max-width:520px;margin:38px auto 0;display:grid;gap:20px;text-align:left}
+.rsvp-field{display:flex;flex-direction:column;gap:9px}
+.rsvp-field label,.rsvp-choice legend{font-size:9px;letter-spacing:3px;font-weight:500;color:var(--muted)}
+.rsvp-field input{background:rgba(11,24,48,.55);border:1px solid rgba(216,216,223,.28);color:var(--crystal);font-family:Montserrat,sans-serif;font-size:14px;padding:14px 16px;transition:.3s;width:100%}
+.rsvp-field input::placeholder{color:rgba(185,198,218,.45)}
+.rsvp-field input:focus{outline:none;border-color:var(--champagne);box-shadow:0 0 0 3px rgba(215,189,145,.14)}
+.rsvp-choice{border:0;padding:0;margin:0;display:grid;gap:10px}
+.rsvp-choice legend{padding:0;margin-bottom:4px}
+.rsvp-option{display:flex;align-items:center;gap:11px;padding:12px 16px;border:1px solid rgba(216,216,223,.22);cursor:pointer;transition:.3s}
+.rsvp-option:hover{border-color:rgba(216,216,223,.45)}
+.rsvp-option input{accent-color:var(--champagne);width:16px;height:16px}
+.rsvp-option span{font-size:12px;color:var(--crystal)}
+.rsvp-form .gold-button{justify-content:center;margin-top:6px;width:100%}
+.rsvp-form .gold-button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.rsvp-feedback{margin:0;font-size:12px;line-height:1.7;min-height:0}
+.rsvp-feedback[data-state="success"]{color:var(--champagne)}
+.rsvp-feedback[data-state="error"]{color:#F2A9A9}
+/* Panel de administración */
+.admin-body{min-height:100vh;background:radial-gradient(ellipse at 50% 0%,rgba(82,107,138,.35) 0%,#0B1830 60%)}
+.admin-topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 6vw;border-bottom:1px solid rgba(216,216,223,.16)}
+.admin-topbar-label{font-size:9px;letter-spacing:3px;font-weight:500;color:var(--crystal)}
+.admin-topbar .outline-button{padding:12px 18px}
+.admin-main{padding:60px 6vw 90px;display:grid;gap:40px;justify-items:center}
+.admin-card{width:100%;max-width:460px;border:1px solid rgba(216,216,223,.24);padding:42px 40px;background:linear-gradient(110deg,rgba(248,250,255,.06),rgba(248,250,255,.02));text-align:center}
+.admin-card h1{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:38px;margin:8px 0 12px;color:var(--crystal)}
+.admin-card .rsvp-form{margin-top:28px}
+.admin-hint{color:var(--muted);font-size:12px;line-height:1.8;margin:0}
+.admin-dashboard{width:100%;max-width:1080px;display:grid;gap:32px}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+.admin-stat{border:1px solid rgba(216,216,223,.24);padding:26px 22px;text-align:center;background:linear-gradient(110deg,rgba(248,250,255,.06),rgba(248,250,255,.02))}
+.admin-stat strong{display:block;font-family:"Cormorant Garamond",serif;font-weight:400;font-size:44px;color:var(--champagne);margin-top:8px}
+.admin-table-wrap{width:100%;overflow-x:auto;border:1px solid rgba(216,216,223,.2)}
+.admin-table{width:100%;border-collapse:collapse;font-size:12px;min-width:720px}
+.admin-table th{text-align:left;padding:15px 18px;background:rgba(11,24,48,.6);color:var(--muted);font-size:9px;letter-spacing:2px;font-weight:500;border-bottom:1px solid rgba(216,216,223,.2);white-space:nowrap}
+.admin-table td{padding:14px 18px;border-bottom:1px solid rgba(216,216,223,.1);color:var(--crystal)}
+.admin-table tbody tr:hover{background:rgba(248,250,255,.04)}
+#admin-dashboard[hidden]{display:none!important}
 .closing{font-family:"Great Vibes",cursive;font-size:56px;color:var(--silver);margin:42px 0 0}
 .closing-star{color:var(--champagne);font-size:20px;margin-top:8px;animation:twinkle 4.5s ease-in-out infinite}
 .game-invite-section{padding:35px 7vw 90px;background:var(--midnight)}

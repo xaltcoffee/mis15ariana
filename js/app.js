@@ -54,12 +54,6 @@ addEventListener("resize", () => {
   renderer.setSize(innerWidth, innerHeight);
 });
 
-// ---------- RSVP: replace the number with the family's WhatsApp ----------
-const WHATSAPP_NUMBER = "59170000000"; // TODO: replace with the real number, country code included
-const rsvpText = "Hola, quiero confirmar mi asistencia a los 15 años de Ariana L. Jauja Aguilar.";
-document.querySelector("#rsvp-button").href =
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(rsvpText)}`;
-
 // Reveal invitation text as each section enters the viewport.
 const textRevealTargets = document.querySelectorAll(
   "main section:not(#inicio) :is(h2,h3,p,a,strong,.signature,.detail-icon,.dress-symbol,.gift-symbol,.closing-star)"
@@ -306,7 +300,7 @@ function drawArtwork() {
   c.fillStyle = "#d8d8df"; c.font = "16px Montserrat, sans-serif";
   c.fillText("CÓDIGO DE VESTIMENTA", 1390, 196);
   c.fillStyle = "#f8faff"; c.font = "22px Georgia, serif";
-  c.fillText("Semi formal", 1390, 238);
+  c.fillText("Formal", 1390, 238);
 
   card(1180, 320, 420, 148);
   c.fillStyle = "#d8d8df"; c.font = "16px Montserrat, sans-serif";

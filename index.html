@@ -98,9 +98,9 @@
         <article class="detail-card">
           <span class="detail-icon">◷</span>
           <p class="detail-label">HORA</p>
-          <h3>7:00</h3>
-          <p>de la noche</p>
-          <strong>P.M.</strong>
+          <h3>18:00</h3>
+          <p>de la tarde</p>
+          <strong>HRS</strong>
         </article>
         <article class="detail-card detail-card-wide">
           <span class="detail-icon">⌖</span>
@@ -116,10 +116,10 @@
       <div class="dress-card">
         <div class="dress-symbol">♛</div>
         <p class="eyebrow">CÓDIGO DE VESTIMENTA</p>
-        <h2>Semi formal</h2>
+        <h2>Formal</h2>
         <p>Te esperamos con tu mejor estilo.</p>
         <div class="gold-rule"></div>
-        <p class="gold-warning">El color dorado está reservado para la quinceañera.</p>
+        <p class="gold-warning">El color celeste claro está reservado para la quinceañera.</p>
       </div>
       <div class="gift-card">
         <div class="gift-symbol">✉</div>
@@ -129,11 +129,43 @@
       </div>
     </section>
 
-    <section class="rsvp-section section-pad">
+    <section id="rsvp" class="rsvp-section section-pad">
       <p class="eyebrow">NOS ENCANTARÍA CONTAR CONTIGO</p>
       <h2>¿Nos acompañas?</h2>
       <p>Confirma tu asistencia y sé parte de esta noche especial.</p>
-      <a id="rsvp-button" class="gold-button" href="#" target="_blank" rel="noopener">CONFIRMAR ASISTENCIA <span>↗</span></a>
+
+      <form id="rsvp-form" class="rsvp-form" novalidate>
+        <div class="rsvp-field">
+          <label for="rsvp-name">Nombre completo</label>
+          <input id="rsvp-name" name="nombreCompleto" type="text" autocomplete="name" maxlength="80" required />
+        </div>
+
+        <div class="rsvp-field">
+          <label for="rsvp-phone">Teléfono</label>
+          <input id="rsvp-phone" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" required />
+        </div>
+
+        <fieldset class="rsvp-field rsvp-choice">
+          <legend>¿Cómo nos acompañas?</legend>
+          <label class="rsvp-option">
+            <input type="radio" name="modalidad" value="solo" checked />
+            <span>Voy solo(a)</span>
+          </label>
+          <label class="rsvp-option">
+            <input type="radio" name="modalidad" value="acompanado" />
+            <span>Voy acompañado(a)</span>
+          </label>
+        </fieldset>
+
+        <div class="rsvp-field" id="rsvp-companion-field" hidden>
+          <label for="rsvp-companion">Nombre del acompañante</label>
+          <input id="rsvp-companion" name="acompanante" type="text" maxlength="80" />
+        </div>
+
+        <button type="submit" id="rsvp-submit" class="gold-button">CONFIRMAR ASISTENCIA <span>✦</span></button>
+        <p id="rsvp-feedback" class="rsvp-feedback" role="status" aria-live="polite"></p>
+      </form>
+
       <p class="closing">¡Te esperamos!</p>
       <div class="closing-star">✦</div>
     </section>
@@ -189,6 +221,7 @@
 
   <audio id="background-music" src="musicAri.m4a" preload="auto" loop playsinline></audio>
 
+  <script type="module" src="js/rsvp.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

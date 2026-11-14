@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0B1830" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel de asistencia · Ariana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="admin-body">
+  <header class="admin-topbar">
+    <a class="monogram" href="index.html" aria-label="Volver a la invitación">A<span>✦</span></a>
+    <span class="admin-topbar-label">PANEL DE ASISTENCIA</span>
+    <button id="admin-logout" class="outline-button" type="button" hidden>CERRAR SESIÓN</button>
+  </header>
+
+  <main class="admin-main">
+    <!-- Inicio de sesión -->
+    <section id="admin-login" class="admin-card">
+      <p class="eyebrow">ACCESO PRIVADO</p>
+      <h1>Panel de confirmaciones</h1>
+      <p class="admin-hint">Ingresa con la cuenta administradora para ver las confirmaciones de asistencia.</p>
+      <form id="admin-login-form" class="rsvp-form" novalidate>
+        <div class="rsvp-field">
+          <label for="admin-email">Correo</label>
+          <input id="admin-email" name="email" type="email" autocomplete="username" required />
+        </div>
+        <div class="rsvp-field">
+          <label for="admin-password">Contraseña</label>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+        <button type="submit" id="admin-login-submit" class="gold-button">ENTRAR <span>✦</span></button>
+        <p id="admin-login-feedback" class="rsvp-feedback" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- Panel de estadísticas -->
+    <section id="admin-dashboard" class="admin-dashboard" hidden>
+      <div class="admin-stats">
+        <article class="admin-stat">
+          <p class="detail-label">CONFIRMACIONES</p>
+          <strong id="stat-confirmaciones">0</strong>
+        </article>
+        <article class="admin-stat">
+          <p class="detail-label">TOTAL DE PERSONAS</p>
+          <strong id="stat-personas">0</strong>
+        </article>
+        <article class="admin-stat">
+          <p class="detail-label">SOLO(A)</p>
+          <strong id="stat-solo">0</strong>
+        </article>
+        <article class="admin-stat">
+          <p class="detail-label">ACOMPAÑADO(A)</p>
+          <strong id="stat-acompanado">0</strong>
+        </article>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Teléfono</th>
+              <th>Modalidad</th>
+              <th>Acompañante</th>
+              <th>Personas</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body"></tbody>
+        </table>
+        <p id="admin-empty" class="admin-hint" hidden>Aún no hay confirmaciones registradas.</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
