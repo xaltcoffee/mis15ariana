@@ -258,6 +258,20 @@ body.intro-locked{overflow:hidden}
  .welcome-floral-top img,.welcome-floral-bottom img{animation:none;opacity:1}
 }
 
+/* Botón flotante de confirmación: acceso permanente a la sección RSVP.
+   Se oculta mientras la portada o el juego están en pantalla. */
+.floating-rsvp{position:fixed;right:clamp(16px,3vw,34px);bottom:calc(clamp(16px,3vw,30px) + env(safe-area-inset-bottom,0px));z-index:25;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border:1px solid rgba(229,193,132,.85);border-radius:999px;background:linear-gradient(110deg,#D7BD91,#F8F6F1);color:#0B1830;font-family:Montserrat,sans-serif;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;white-space:nowrap;box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 22px rgba(229,193,132,.28);transition:transform .3s ease,box-shadow .3s ease,opacity .4s ease,visibility .4s ease;animation:floatingRsvpPulse 3.4s ease-in-out 2s infinite}
+.floating-rsvp span{font-size:13px;color:#0B1830}
+.floating-rsvp:hover,.floating-rsvp:focus-visible{transform:translateY(-3px);box-shadow:0 20px 52px rgba(0,0,0,.5),0 0 42px rgba(229,193,132,.55);outline:none}
+@keyframes floatingRsvpPulse{0%,100%{box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 20px rgba(229,193,132,.24)}50%{box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 42px rgba(229,193,132,.55)}}
+body.intro-locked .floating-rsvp,body.game-open .floating-rsvp{opacity:0;visibility:hidden;pointer-events:none}
+@media(max-width:700px){
+ .floating-rsvp{left:50%;right:auto;translate:-50% 0;width:calc(100% - 36px);max-width:340px;padding:15px 22px;letter-spacing:.18em}
+}
+@media(prefers-reduced-motion:reduce){
+ .floating-rsvp{animation:none}
+}
+
 /* Interactive game */
 .game-modal{position:fixed;inset:0;z-index:20;background:rgba(5,9,20,.9);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(12px)}
 .game-modal.open{display:flex}

@@ -825,12 +825,15 @@ function openGame() {
   pauseBackgroundMusic();
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
+  // Oculta el botón flotante de confirmación mientras se juega.
+  document.body.classList.add("game-open");
   resetGame();
   if (!running) { running = true; requestAnimationFrame(loop); }
 }
 function closeGame() {
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("game-open");
   closeVideo();
   firing = false;
   joy.active = false;
