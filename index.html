@@ -150,21 +150,16 @@
         </div>
 
         <fieldset class="rsvp-field rsvp-choice">
-          <legend>¿Cómo nos acompañas?</legend>
+          <legend>¿Nos acompañas?</legend>
           <label class="rsvp-option">
-            <input type="radio" name="modalidad" value="solo" checked />
-            <span>Voy solo(a)</span>
+            <input type="radio" name="asistencia" value="si" checked />
+            <span>Sí, asistiré</span>
           </label>
           <label class="rsvp-option">
-            <input type="radio" name="modalidad" value="acompanado" />
-            <span>Voy acompañado(a)</span>
+            <input type="radio" name="asistencia" value="no" />
+            <span>No podré asistir</span>
           </label>
         </fieldset>
-
-        <div class="rsvp-field" id="rsvp-companion-field" hidden>
-          <label for="rsvp-companion">Nombre del acompañante</label>
-          <input id="rsvp-companion" name="acompanante" type="text" maxlength="80" />
-        </div>
 
         <button type="submit" id="rsvp-submit" class="gold-button">CONFIRMAR ASISTENCIA <span>✦</span></button>
         <p id="rsvp-feedback" class="rsvp-feedback" role="status" aria-live="polite"></p>
@@ -228,7 +223,7 @@
   <!-- Botón flotante: lleva directo a la sección de confirmación. Se oculta en la portada y durante el juego. -->
   <a id="floating-rsvp" class="floating-rsvp" href="#rsvp">CONFIRMAR ASISTENCIA <span>✦</span></a>
 
-  <script type="module" src="js/rsvp.js"></script>
+  <script type="module" src="js/rsvp.js?v=2"></script>
   <script type="module" src="js/app.js?v=3"></script>
 </body>
 </html>

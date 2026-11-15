@@ -2,9 +2,6 @@ rules_version = '2';
 
 // Reglas de seguridad de Cloud Firestore (proyecto mis15-5aee3).
 // PÉGALAS EN: Firebase Console → Firestore Database → Reglas → Publicar.
-//
-// ANTES DE PUBLICAR: reemplaza ADMIN_EMAIL_AQUI por el correo del usuario
-// administrador que creaste en Authentication → Users.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -38,13 +35,11 @@ service cloud.firestore {
         && d.telefono.size() >= 7 && d.telefono.size() <= 25
         && d.telefonoId is string
         && d.telefonoId.size() >= 7 && d.telefonoId.size() <= 15
-        && d.modalidad in ['solo', 'acompanado']
+        && d.modalidad in ['si', 'no']
         && d.totalPersonas is int
         && (
-          (d.modalidad == 'solo' && d.totalPersonas == 1 && d.acompanante == null)
-          || (d.modalidad == 'acompanado' && d.totalPersonas == 2
-              && d.acompanante is string
-              && d.acompanante.size() >= 3 && d.acompanante.size() <= 80)
+          (d.modalidad == 'si' && d.totalPersonas == 1 && d.acompanante == null)
+          || (d.modalidad == 'no' && d.totalPersonas == 0 && d.acompanante == null)
         );
     }
   }

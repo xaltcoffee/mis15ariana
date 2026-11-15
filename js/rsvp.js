@@ -18,21 +18,10 @@ if (form) {
 
   const nameInput = form.querySelector("#rsvp-name");
   const phoneInput = form.querySelector("#rsvp-phone");
-  const companionField = form.querySelector("#rsvp-companion-field");
-  const companionInput = form.querySelector("#rsvp-companion");
   const feedback = form.querySelector("#rsvp-feedback");
   const submitButton = form.querySelector("#rsvp-submit");
 
   const digitsOnly = (value) => String(value || "").replace(/\D/g, "");
-
-  // El campo del acompañante solo se muestra cuando se elige "acompañado".
-  form.addEventListener("change", (event) => {
-    if (event.target.name !== "modalidad") return;
-    const accompanied = event.target.value === "acompanado";
-    companionField.hidden = !accompanied;
-    companionInput.required = accompanied;
-    if (!accompanied) companionInput.value = "";
-  });
 
   function setFeedback(message, type) {
     feedback.textContent = message;
@@ -48,9 +37,7 @@ if (form) {
     const nombreCompleto = nameInput.value.trim();
     const telefono = phoneInput.value.trim();
     const phoneId = digitsOnly(telefono);
-    const modalidad = form.querySelector("input[name='modalidad']:checked").value;
-    const acompanante =
-      modalidad === "acompanado" ? companionInput.value.trim() : "";
+    const asistencia = form.querySelector("input[name='asistencia']:checked").value;
 
     if (nombreCompleto.length < 3 || nombreCompleto.length > 80) {
       return { error: "Escribe tu nombre completo (mínimo 3 caracteres)." };
@@ -58,21 +45,19 @@ if (form) {
     if (phoneId.length < 7 || phoneId.length > 15) {
       return { error: "Escribe un teléfono válido (entre 7 y 15 dígitos)." };
     }
-    if (modalidad === "acompanado" && (acompanante.length < 3 || acompanante.length > 80)) {
-      return { error: "Escribe el nombre completo de tu acompañante." };
-    }
 
     return {
       data: {
         nombreCompleto,
         telefono,
         telefonoId: phoneId,
-        modalidad,
-        acompanante: acompanante || null,
-        totalPersonas: modalidad === "acompanado" ? 2 : 1,
+        modalidad: asistencia,
+        acompanante: null,
+        totalPersonas: asistencia === "si" ? 1 : 0,
         creadoEn: serverTimestamp(),
       },
       phoneId,
+      asistencia,
     };
   }
 
@@ -92,9 +77,12 @@ if (form) {
       // "create" para el público: por eso un duplicado se rechaza en el servidor.
       await setDoc(doc(db, "rsvp", result.phoneId), result.data);
       form.reset();
-      companionField.hidden = true;
-      companionInput.required = false;
-      setFeedback("¡Gracias! Tu asistencia quedó confirmada. Te esperamos. ✦", "success");
+      setFeedback(
+        result.asistencia === "si"
+          ? "¡Gracias! Tu asistencia quedó confirmada. Te esperamos. ✦"
+          : "Gracias por avisarnos. Te vamos a extrañar. ✦",
+        "success"
+      );
     } catch (error) {
       // Diagnóstico: dejamos el código real visible en la consola del navegador.
       const code = (error && error.code) || "desconocido";
